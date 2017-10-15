@@ -1,9 +1,9 @@
-import React, { Component } from 'react';
+import React from 'react';
 import Board from './components/Board';
-import logo from './logo.svg';
 import './App.css';
 
-class App extends Component {
+export default class App extends React.PureComponent {
+
   render() {
     return (
       <div className="App">
@@ -13,5 +13,3 @@ class App extends Component {
     );
   }
 }
-
-export default App;
