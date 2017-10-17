@@ -1,12 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import Square from './Square';
 
-export default class Square extends React.PureComponent {
+export default class Row extends React.PureComponent {
 
   static propTypes = {
-    id: PropTypes.number,
-    onClick: PropTypes.func,
-    content: PropTypes.string
+    row: PropTypes.arrayOf(PropTypes.shape({}))
   }
 
   _handleClick(e) {
@@ -20,17 +19,25 @@ export default class Square extends React.PureComponent {
   render() {
 
     let {
-      id,
+      rows,
       content
     } = this.props;
 
+    let squares = row.map((square) => (
+      <Square
+        key={square.id}
+        id={square.id}
+        content={square.content}
+        onClick={this._handleClick.bind(this)}
+      />
+    ));
+
     return (
       <div
-        id={id}
-        className="square"
+        className="row"
         onClick={this._handleClick.bind(this)}
       >
-        {content}
+        {squares}
       </div>
     );
   }

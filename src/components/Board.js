@@ -1,13 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Square from './Square';
+import Row from './Row';
 
 export default class Board extends React.PureComponent {
 
   constructor(props) {
     super(props);
     this.state = {
-      board: [['X', 'O', ''],
+      board: [['', '', ''],
               ['', '', ''],
               ['', '', '']]
     }
@@ -15,59 +15,32 @@ export default class Board extends React.PureComponent {
 
   static propTypes = {
     onClick: PropTypes.func,
-    content: PropTypes.string
+    rows: PropTypes.arrayOf(PropTypes.shape({}))
   }
 
   _handleClick(e) {
+    console.log(e.target)
     console.log('board')
   }
 
   render() {
 
+    let {
+      rows
+    } = this.props;
+
+    let rows = rows.map((row) => (
+      <Row
+        key={row.id}
+        id={row.id}
+        content={row.content}
+        onClick={this._handleClick.bind(this)}
+      />
+    ));
+
     return (
       <div className="board">
-        <div className="row">
-          <Square
-            onClick={this._handleClick}
-            content={this.state.board[0][0]}
-          />
-          <Square
-            onClick={this._handleClick}
-            content={this.state.board[0][1]}
-          />
-          <Square
-            onClick={this._handleClick}
-            content={this.state.board[0][2]}
-          />
-        </div>
-        <div className="row">
-          <Square
-            onClick={this._handleClick}
-            content={this.state.board[1][0]}
-          />
-          <Square
-            onClick={this._handleClick}
-            content={this.state.board[1][1]}
-          />
-          <Square
-            onClick={this._handleClick}
-            content={this.state.board[1][2]}
-          />
-        </div>
-        <div className="row">
-          <Square
-            onClick={this._handleClick}
-            content={this.state.board[2][0]}
-          />
-          <Square
-            onClick={this._handleClick}
-            content={this.state.board[2][1]}
-          />
-          <Square
-            onClick={this._handleClick}
-            content={this.state.board[2][2]}
-          />
-        </div>
+        {rows}
       </div>
     );
   }
