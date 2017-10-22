@@ -5,23 +5,38 @@ import Square from './Square';
 export default class Row extends React.PureComponent {
 
   static propTypes = {
-    rowContent: PropTypes.arrayOf(PropTypes.string)
+    id: PropTypes.integer,
+    rowContent: PropTypes.arrayOf(PropTypes.string),
+    onClick: PropTypes.func
+  }
+
+  _handleClick(id) {
+    // e.stopPropagation();
+    // console.log(e.target.id);
+    let row = this.props.id;
+    let col = id;
+    this.props.onClick(row, col);
   }
 
   render() {
 
     let {
-      rowContent
+      id,
+      rowContent,
+      onClick
     } = this.props;
 
-    let squares = rowContent.map((content) => (
+    let squares = rowContent.map((content, id) => (
       <Square
+        id={id}
         content={content}
+        onClick={this._handleClick.bind(this)}
       />
     ));
 
     return (
       <div
+        id={id}
         className="row"
       >
         {squares}
