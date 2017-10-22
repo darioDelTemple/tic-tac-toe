@@ -4,37 +4,21 @@ import Row from './Row';
 
 export default class Board extends React.PureComponent {
 
-  constructor(props) {
-    super(props);
-    this.state = {
-      board: [['', '', ''],
-              ['', '', ''],
-              ['', '', '']]
-    }
-  }
-
   static propTypes = {
-    onClick: PropTypes.func,
-    rows: PropTypes.arrayOf(PropTypes.shape({}))
-  }
-
-  _handleClick(e) {
-    console.log(e.target)
-    console.log('board')
+    boardContent: PropTypes.arrayOf(PropTypes.arrayOf(PropTypes.string))
   }
 
   render() {
 
     let {
-      rows
+      boardContent
     } = this.props;
 
-    let rows = rows.map((row) => (
+    let rows = boardContent.map((rowContent) => (
       <Row
-        key={row.id}
-        id={row.id}
-        content={row.content}
-        onClick={this._handleClick.bind(this)}
+        // key={row.id}
+        // id={row.id}
+        rowContent={rowContent}
       />
     ));
 
