@@ -9,16 +9,33 @@ export default class Board extends React.Component {
     this.state = {
       board: [['', '', ''],
              ['', '', ''],
-             ['', '', '']]
+             ['', '', '']],
+      turns: 0
     }
   };
 
 
   _handleClick(row, col) {
-    console.log(`row=${row}, col=${col}`);
-    let newBoard = this.state.board;
-    newBoard[row][col] = 'X';
-    this.setState({board: newBoard});
+    // check if square has already been clicked
+    if (this.state.board[row][col] != '') {
+      console.log('Turn already taken here!')
+    } else {
+      // check whos turn it is
+      let currentPlayer;
+      if (this.state.turns % 2 === 0) {
+        currentPlayer = 'X';
+      } else {
+        currentPlayer = 'O';
+      }
+
+      // update the board
+      let newBoard = this.state.board;
+      newBoard[row][col] = currentPlayer;
+      this.setState({board: newBoard});
+
+      // increment turns
+      this.setState({turns: this.state.turns + 1})
+    }
   }
 
   render() {
