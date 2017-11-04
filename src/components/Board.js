@@ -2,23 +2,28 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Row from './Row';
 
-export default class Board extends React.PureComponent {
+export default class Board extends React.Component {
 
-  static propTypes = {
-    boardContent: PropTypes.arrayOf(PropTypes.arrayOf(PropTypes.string))
-  }
+  constructor(props) {
+    super(props);
+    this.state = {
+      board: [['', '', ''],
+             ['', '', ''],
+             ['', '', '']]
+    }
+  };
+
 
   _handleClick(row, col) {
     console.log(`row=${row}, col=${col}`);
+    let newBoard = this.state.board;
+    newBoard[row][col] = 'X';
+    this.setState({board: newBoard});
   }
 
   render() {
 
-    let {
-      boardContent
-    } = this.props;
-
-    let rows = boardContent.map((rowContent, id) => (
+    let rows = this.state.board.map((rowContent, id) => (
       <Row
         // key={row.id}
         id={id}
