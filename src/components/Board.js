@@ -10,14 +10,52 @@ export default class Board extends React.Component {
       board: [['', '', ''],
              ['', '', ''],
              ['', '', '']],
-      turns: 0
+      turns: 0,
+      winner: ''
     }
   };
 
+  _checkRow(board, row) {
+    let first = board[row][0];
+
+    if (first == '') {
+      return;
+    } else {
+      for (let col = 1; col < board[row].length; col++) {
+        if (first != board[row][col]) {
+          return;
+        }
+      }
+    }
+
+    return first;
+  }
+
+  _checkRows(board) {
+    for (let row = 0; row < board.length; row++) {
+      let rowWinner = this._checkRow(board, row);
+
+      if (rowWinner) {
+        return rowWinner;
+      }
+    }
+  }
+
+  _checkWinner(board) {
+
+    // check for winner on rows
+    // check for winner on cols
+    // check for winner on diags
+    return this._checkRows(board);
+
+  }
+
 
   _handleClick(row, col) {
-    // check if square has already been clicked
-    if (this.state.board[row][col] != '') {
+
+    if (this.state.winner) {
+      console.log(`WINNER: ${this.state.winner}`);
+    } else if (this.state.board[row][col] != '') {
       console.log('Turn already taken here!')
     } else {
       // check whos turn it is
@@ -34,7 +72,12 @@ export default class Board extends React.Component {
       this.setState({board: newBoard});
 
       // increment turns
-      this.setState({turns: this.state.turns + 1})
+      this.setState({turns: this.state.turns + 1});
+
+      // check winner
+      let winner = this._checkWinner(this.state.board);
+      this.setState({winner: winner});
+      console.log(winner);
     }
   }
 
