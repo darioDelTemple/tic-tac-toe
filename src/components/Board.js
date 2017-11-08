@@ -31,6 +31,32 @@ export default class Board extends React.Component {
     return first;
   }
 
+  _checkColumn(board, column) {
+    let first = board[0][column];
+
+    if (first == '') {
+      return;
+    } else {
+      for (let row = 1; row < board[column].length; row++) {
+        if (first != board[row][column]) {
+          return;
+        }
+      }
+    }
+
+    return first;
+  }
+
+  _checkColumns(board) {
+    for (let column = 0; column < board.length; column++) {
+      let columnWinner = this._checkColumn(board, column);
+
+      if (columnWinner) {
+        return columnWinner;
+      }
+    }
+  }
+
   _checkRows(board) {
     for (let row = 0; row < board.length; row++) {
       let rowWinner = this._checkRow(board, row);
@@ -46,7 +72,7 @@ export default class Board extends React.Component {
     // check for winner on rows
     // check for winner on cols
     // check for winner on diags
-    return this._checkRows(board);
+    return this._checkRows(board) || this._checkColumns(board);
 
   }
 
