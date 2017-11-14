@@ -133,10 +133,14 @@ export default class Board extends React.Component {
       // increment turns
       this.setState({turns: this.state.turns + 1});
 
-      // check winner
-      let winner = this._checkWinner(this.state.board);
-      this.setState({winner: winner});
-      console.log(winner);
+      if (this.state.turns == 8) {
+        console.log('TIE!');
+      } else {
+        // check winner
+        let winner = this._checkWinner(this.state.board);
+        this.setState({winner: winner});
+        console.log(winner);
+      }
     }
   }
 
