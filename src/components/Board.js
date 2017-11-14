@@ -10,7 +10,9 @@ export default class Board extends React.Component {
       board: [['', '', ''],
              ['', '', ''],
              ['', '', '']],
-      turns: 0,
+      currentPlayer: 'X',
+      nextPlayer: 'O',
+      turns: 1,
       winner: ''
     }
   };
@@ -109,6 +111,22 @@ export default class Board extends React.Component {
 
   }
 
+  _getMessage(state) {
+    let message;
+
+    if (state.turns == 1) {
+      message = 'X goes first!'
+    } else if (state.turns > 9) {
+      message = 'It\'s a tie!';
+    } else if (state.winner) {
+      message = `${state.winner} wins!`;
+    } else {
+      message = `${state.nextPlayer} goes next!`;
+    }
+
+    return message;
+  }
+
 
   _handleClick(row, col) {
 
@@ -119,28 +137,29 @@ export default class Board extends React.Component {
     } else {
       // check whos turn it is
       let currentPlayer;
-      if (this.state.turns % 2 === 0) {
+      let nextPlayer;
+      if (this.state.turns % 2 != 0) {
         currentPlayer = 'X';
+        nextPlayer = 'O';
       } else {
         currentPlayer = 'O';
+        nextPlayer = 'X';
       }
+
+      // increment turns
+      this.setState({turns: this.state.turns + 1});
+
+      this.setState({currentPlayer: currentPlayer, nextPlayer: nextPlayer});
 
       // update the board
       let newBoard = this.state.board;
       newBoard[row][col] = currentPlayer;
       this.setState({board: newBoard});
 
-      // increment turns
-      this.setState({turns: this.state.turns + 1});
+      // check winner
+      let winner = this._checkWinner(this.state.board);
+      this.setState({winner: winner});
 
-      if (this.state.turns == 8) {
-        console.log('TIE!');
-      } else {
-        // check winner
-        let winner = this._checkWinner(this.state.board);
-        this.setState({winner: winner});
-        console.log(winner);
-      }
     }
   }
 
@@ -155,9 +174,14 @@ export default class Board extends React.Component {
       />
     ));
 
+    let message = this._getMessage(this.state);
+
     return (
-      <div className="board">
-        {rows}
+      <div>
+        <div className="message">{message}</div>
+        <div className="board">
+          {rows}
+        </div>
       </div>
     );
   }
