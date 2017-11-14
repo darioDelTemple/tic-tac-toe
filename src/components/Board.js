@@ -67,12 +67,45 @@ export default class Board extends React.Component {
     }
   }
 
+  _checkLeftDiagonal(board) {
+    let first = board[0][0];
+
+    if (first == '') {
+      return;
+    } else {
+      for (let i = 1; i < board.length; i++) {
+        if (first != board[i][i]) {
+          return;
+        }
+      }
+    }
+
+    return first;
+  }
+
+  _checkRightDiagonal(board) {
+    let row = 0;
+    let col = 2;
+    let first = board[row][col];
+
+
+    if (first == '') {
+      return;
+    } else {
+      for (let k = 1; k < board.length; k++) {
+        if (first != board[row + k][col - k]) {
+          return;
+        }
+      }
+    }
+
+    return first;
+  }
+
   _checkWinner(board) {
 
-    // check for winner on rows
-    // check for winner on cols
-    // check for winner on diags
-    return this._checkRows(board) || this._checkColumns(board);
+    let diagWinner = this._checkLeftDiagonal(board) || this._checkRightDiagonal(board);
+    return this._checkRows(board) || this._checkColumns(board) || diagWinner;
 
   }
 
