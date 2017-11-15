@@ -6,15 +6,7 @@ export default class Board extends React.Component {
 
   constructor(props) {
     super(props);
-    this.state = {
-      board: [['', '', ''],
-             ['', '', ''],
-             ['', '', '']],
-      currentPlayer: 'X',
-      nextPlayer: 'O',
-      turns: 1,
-      winner: ''
-    }
+    this.state = this._getInitialState();
   };
 
   _checkRow(board, row) {
@@ -164,7 +156,11 @@ export default class Board extends React.Component {
   }
 
   _resetBoard() {
-    this.setState({
+    this.setState(this._getInitialState());
+  }
+
+  _getInitialState() {
+    return {
       board: [['', '', ''],
              ['', '', ''],
              ['', '', '']],
@@ -172,7 +168,7 @@ export default class Board extends React.Component {
       nextPlayer: 'O',
       turns: 1,
       winner: ''
-    })
+    }
   }
 
   render() {
