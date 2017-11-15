@@ -163,6 +163,18 @@ export default class Board extends React.Component {
     }
   }
 
+  _resetBoard() {
+    this.setState({
+      board: [['', '', ''],
+             ['', '', ''],
+             ['', '', '']],
+      currentPlayer: 'X',
+      nextPlayer: 'O',
+      turns: 1,
+      winner: ''
+    })
+  }
+
   render() {
 
     let rows = this.state.board.map((rowContent, id) => (
@@ -178,6 +190,7 @@ export default class Board extends React.Component {
 
     return (
       <div>
+        <button onClick={this._resetBoard.bind(this)} className="reset">RESET</button>
         <div className="message">{message}</div>
         <div className="board">
           {rows}

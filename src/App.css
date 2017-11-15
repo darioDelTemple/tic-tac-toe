@@ -2,6 +2,20 @@
   text-align: center;
 }
 
+button {
+  background-color: #FFF;
+  border-style: solid;
+  border-color: #000;
+  font-size: 16px;
+  font-style: bold;
+  padding: 5px 10px;
+  margin-bottom: 20px;
+}
+
+button:hover {
+  background-color: cyan;
+}
+
 .board {
   display: block;
 }
