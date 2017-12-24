@@ -5,9 +5,8 @@ import Square from './Square';
 export default class Row extends React.PureComponent {
 
   static propTypes = {
-    id: PropTypes.integer,
-    rowContent: PropTypes.arrayOf(PropTypes.string),
-    onClick: PropTypes.func
+    id: PropTypes.number,
+    rowContent: PropTypes.arrayOf(PropTypes.string)
   }
 
   _handleClick(id) {
@@ -22,12 +21,12 @@ export default class Row extends React.PureComponent {
 
     let {
       id,
-      rowContent,
-      onClick
+      rowContent
     } = this.props;
 
     let squares = rowContent.map((content, id) => (
       <Square
+        key={id}
         id={id}
         content={content}
         onClick={this._handleClick.bind(this)}

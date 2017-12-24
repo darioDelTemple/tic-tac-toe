@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import Row from './Row';
 
 export default class Board extends React.Component {
@@ -12,11 +11,11 @@ export default class Board extends React.Component {
   _checkRow(board, row) {
     let first = board[row][0];
 
-    if (first == '') {
+    if (first === '') {
       return;
     } else {
       for (let col = 1; col < board[row].length; col++) {
-        if (first != board[row][col]) {
+        if (first !== board[row][col]) {
           return;
         }
       }
@@ -28,11 +27,11 @@ export default class Board extends React.Component {
   _checkColumn(board, column) {
     let first = board[0][column];
 
-    if (first == '') {
+    if (first === '') {
       return;
     } else {
       for (let row = 1; row < board[column].length; row++) {
-        if (first != board[row][column]) {
+        if (first !== board[row][column]) {
           return;
         }
       }
@@ -64,11 +63,11 @@ export default class Board extends React.Component {
   _checkLeftDiagonal(board) {
     let first = board[0][0];
 
-    if (first == '') {
+    if (first === '') {
       return;
     } else {
       for (let i = 1; i < board.length; i++) {
-        if (first != board[i][i]) {
+        if (first !== board[i][i]) {
           return;
         }
       }
@@ -83,11 +82,11 @@ export default class Board extends React.Component {
     let first = board[row][col];
 
 
-    if (first == '') {
+    if (first === '') {
       return;
     } else {
       for (let k = 1; k < board.length; k++) {
-        if (first != board[row + k][col - k]) {
+        if (first !== board[row + k][col - k]) {
           return;
         }
       }
@@ -122,7 +121,7 @@ export default class Board extends React.Component {
 
     if (this.state.winner) {
       console.log(`WINNER: ${this.state.winner}`);
-    } else if (this.state.board[row][col] != '') {
+    } else if (this.state.board[row][col] !== '') {
       console.log('Turn already taken here!')
     } else {
 
@@ -146,7 +145,7 @@ export default class Board extends React.Component {
   }
 
   _getCurrentPlayer(state) {
-    return state.turns % 2 == 0 ? 'O' : 'X';
+    return state.turns % 2 === 0 ? 'O' : 'X';
   }
 
   _getInitialState() {
@@ -163,7 +162,7 @@ export default class Board extends React.Component {
 
     let rows = this.state.board.map((rowContent, id) => (
       <Row
-        // key={row.id}
+        key={id}
         id={id}
         rowContent={rowContent}
         onClick={this._handleClick.bind(this)}

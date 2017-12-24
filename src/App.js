@@ -1,6 +1,4 @@
 import React from 'react';
-import Square from './components/Square';
-import Row from './components/Row';
 import Board from './components/Board';
 import './App.css';
 
@@ -9,19 +7,20 @@ export default class App extends React.PureComponent {
   constructor(props) {
     super(props);
     this.state = {
-      boards: [this._createBoard()]
+      boards: [this._createBoard(0)]
     };
   };
 
   _addBoard() {
     console.log("adding board")
     let boards = this.state.boards;
-    let newBoards = boards.concat([this._createBoard()]);
+    let id = this.state.boards.length() + 1;
+    let newBoards = boards.concat([this._createBoard(id)]);
     this.setState({boards: newBoards});
   }
 
-  _createBoard() {
-    return <Board />
+  _createBoard(id) {
+    return <Board key={id} />
   }
 
   render() {

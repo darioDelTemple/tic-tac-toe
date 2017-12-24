@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 export default class Square extends React.PureComponent {
 
   static propTypes = {
-    id: PropTypes.integer,
+    id: PropTypes.number,
     content: PropTypes.string,
     onClick: PropTypes.func
   }
