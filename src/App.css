@@ -32,6 +32,8 @@ button:hover {
   display: inline-block;
   width: 20vmin;
   height: 20vmin;
+  line-height: 20vmin;
+  font-size: 60px;
   border: 1vmin solid black;
   overflow: hidden;
 }
