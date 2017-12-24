@@ -10,7 +10,6 @@ export default class Square extends React.PureComponent {
   }
 
   _handleClick(e) {
-    // e.stopPropagation();
     this.props.onClick(e.target.id);
   }
 

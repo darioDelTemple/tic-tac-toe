@@ -264,7 +264,6 @@ it('finds a draw', () => {
   expect(squares.at(7).text()).toEqual('X');
 
   expect(message.text()).toEqual('It\'s a tie!');
-
 });
 
 it('adds a new board', () => {
@@ -277,5 +276,4 @@ it('adds a new board', () => {
   button.at(0).simulate('click');
 
   expect(app.find('.board')).toHaveLength(2);
-
 });

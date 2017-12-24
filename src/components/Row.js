@@ -10,8 +10,6 @@ export default class Row extends React.PureComponent {
   }
 
   _handleClick(id) {
-    // e.stopPropagation();
-    // console.log(e.target.id);
     let row = this.props.id;
     let col = id;
     this.props.onClick(row, col);

@@ -12,9 +12,8 @@ export default class App extends React.PureComponent {
   };
 
   _addBoard() {
-    console.log("adding board")
     let boards = this.state.boards;
-    let id = this.state.boards.length() + 1;
+    let id = this.state.boards.length + 1;
     let newBoards = boards.concat([this._createBoard(id)]);
     this.setState({boards: newBoards});
   }

@@ -120,9 +120,9 @@ export default class Board extends React.Component {
   _handleClick(row, col) {
 
     if (this.state.winner) {
-      console.log(`WINNER: ${this.state.winner}`);
+      return;
     } else if (this.state.board[row][col] !== '') {
-      console.log('Turn already taken here!')
+      return;
     } else {
 
       // increment turns
@@ -173,8 +173,12 @@ export default class Board extends React.Component {
 
     return (
       <div>
-        <button onClick={this._resetBoard.bind(this)} className="reset">RESET</button>
-        <div className="message">{message}</div>
+        <button onClick={this._resetBoard.bind(this)} className="reset">
+          RESET
+        </button>
+        <div className="message">
+          {message}
+        </div>
         <div className="board">
           {rows}
         </div>
