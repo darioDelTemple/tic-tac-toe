@@ -106,14 +106,12 @@ export default class Board extends React.Component {
   _getMessage(state) {
     let message;
 
-    if (state.turns == 1) {
-      message = 'X goes first!'
+    if (state.winner) {
+      message = `${state.winner} wins!`;
     } else if (state.turns > 9) {
       message = 'It\'s a tie!';
-    } else if (state.winner) {
-      message = `${state.winner} wins!`;
     } else {
-      message = `${state.nextPlayer} goes next!`;
+      message = this._getCurrentPlayer(state) + ' goes next!';
     }
 
     return message;
@@ -127,25 +125,13 @@ export default class Board extends React.Component {
     } else if (this.state.board[row][col] != '') {
       console.log('Turn already taken here!')
     } else {
-      // check whos turn it is
-      let currentPlayer;
-      let nextPlayer;
-      if (this.state.turns % 2 != 0) {
-        currentPlayer = 'X';
-        nextPlayer = 'O';
-      } else {
-        currentPlayer = 'O';
-        nextPlayer = 'X';
-      }
 
       // increment turns
       this.setState({turns: this.state.turns + 1});
 
-      this.setState({currentPlayer: currentPlayer, nextPlayer: nextPlayer});
-
       // update the board
       let newBoard = this.state.board;
-      newBoard[row][col] = currentPlayer;
+      newBoard[row][col] = this._getCurrentPlayer(this.state);
       this.setState({board: newBoard});
 
       // check winner
@@ -159,13 +145,15 @@ export default class Board extends React.Component {
     this.setState(this._getInitialState());
   }
 
+  _getCurrentPlayer(state) {
+    return state.turns % 2 == 0 ? 'O' : 'X';
+  }
+
   _getInitialState() {
     return {
       board: [['', '', ''],
              ['', '', ''],
              ['', '', '']],
-      currentPlayer: 'X',
-      nextPlayer: 'O',
       turns: 1,
       winner: ''
     }
