@@ -21,7 +21,7 @@ The technologies I used to build this app are: HTML, CSS, React, Jest, and Enzym
 
 ## Requirements
 
-#### Build a two player tic tac toe app where a game can be played by alternating clicks until the game is won by X, O or is a tie.
+#### Build a two player tic tac toe app where a game is played by alternating clicks until the game is won by X, O or is a tie.
 
 I added a `message` that displays which player's turn it is based on the number of turns taken. The `message` also displays whether a player has won or if there is a tie.
 
