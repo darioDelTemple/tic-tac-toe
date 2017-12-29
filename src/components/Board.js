@@ -120,8 +120,10 @@ export default class Board extends React.Component {
   _handleClick(row, col) {
 
     if (this.state.winner) {
+      alert('A winner has already been declared! Press reset to play again.')
       return;
     } else if (this.state.board[row][col] !== '') {
+      alert('A move has already been played in that square!')
       return;
     } else {
 
